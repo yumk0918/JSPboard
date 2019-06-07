@@ -10,11 +10,23 @@
         		<span class="icon-bar"></span> 
       		</button>	
 	    </div>
+<%
+	Object userId=session.getAttribute("userId");
+%>
 	    <ul class="nav navbar-nav navbar-right collapse navbar-collapse" id="myNavbar">
+<%
+	if(userId==null){
+%>	      
 	      <li><a href="/JSPboard/form.jsp"><span class="glyphicon glyphicon-user"></span> 회원가입</a></li>
-	      <li><a href="#"><span class="glyphicon glyphicon-user"></span> 개인정보수정</a></li>
 	      <li><a href="/JSPboard/login.jsp"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
-	      <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> 로그아웃</a></li>
+<%
+	}else{
+%>      
+	      <li><a href="#"><span class="glyphicon glyphicon-user"></span> 개인정보수정</a></li>
+	      <li><a href="/JSPboard/logout.jsp"><span class="glyphicon glyphicon-log-out"></span> 로그아웃</a></li>
+<%
+	}
+%>
 	    </ul>
 	  </div>
 	</nav>

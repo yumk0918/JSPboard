@@ -11,7 +11,7 @@
 	<div class="container">
 	<h1 class="text-center">로그인</h1>
 	<br/>
-	<form action="#" method="post">
+	<form action="/JSPboard/login_action.jsp" method="post">
 	
 	  <div class="form-group">
 	    <label for="userId">사용자 아이디 :</label>
@@ -24,6 +24,19 @@
 	  </div>
 	  <br/>
 	  <button type="submit" class="btn btn-primary btn-lg btn-block">로그인</button>
+	  <br/>
+	  <%
+	  	Object errorMessage=request.getAttribute("errorMessage");
+	  	if(errorMessage!=null){
+	  %>
+	  	<div class="form-group">
+	  		<label style="color: red;"><%=errorMessage%></label>
+	  	</div>
+	  <%
+	  	}else{
+	  		%><br/><% 
+	  	}
+	  %>
 	  </form>
 	  </div>
 	  </div>

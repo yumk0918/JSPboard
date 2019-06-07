@@ -8,6 +8,6 @@
 			request.getParameter("password"),
 			request.getParameter("name"),
 			request.getParameter("email"));
-	Database.addMap(user);
+	Database.addUser(user);
 	response.sendRedirect("/JSPboard");
 %>

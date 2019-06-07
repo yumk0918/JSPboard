@@ -1,5 +1,9 @@
 package com.board.user;
 
+import javax.xml.ws.Response;
+
+import com.board.db.Database;
+
 public class User {
 	private String userId;
 	private String password;
@@ -39,6 +43,19 @@ public class User {
 	@Override
 	public String toString() {
 		return "Users [userId=" + userId + ", password=" + password + ", name=" + name + ", email=" + email + "]";
+	}
+	public boolean matchPassword(String newPassword) {
+		return this.password.equals(newPassword);
+	}
+	public static boolean login(String userId, String password) throws UserNotFoundException, PasswordMismatchException {
+		User user=Database.findByUserId(userId);
+		if(user==null) {
+			throw new UserNotFoundException();
+		}
+		if(!user.matchPassword(password)) {
+			throw new PasswordMismatchException();
+		}
+		return true;
 	}
 	
 	
