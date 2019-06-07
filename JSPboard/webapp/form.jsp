@@ -11,7 +11,7 @@
 	<div class="container">
 	<h1 class="text-center">회원가입</h1>
 	<br/>
-	<form action="#" method="post">
+	<form action="/JSPboard/form_action.jsp" method="post">
 	  <div class="form-group">
 	    <label for="userId">사용자 아이디 :</label>
 	    <input type="text" name="userId" class="form-control">
