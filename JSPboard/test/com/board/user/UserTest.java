@@ -1,10 +1,8 @@
 package com.board.user;
 
 import static org.junit.Assert.*;
-
 import org.junit.Test;
 
-import com.board.db.Database;
 
 public class UserTest {
 	public static final User TEST_USER=new User("userId","password","name","email@email");
@@ -19,7 +17,8 @@ public class UserTest {
 	@Test
 	public void login() throws Exception{
 		User user=UserTest.TEST_USER;
-		Database.addUser(user);
+		UserDAO userDAO=new UserDAO();
+		userDAO.addUser(user);
 		
 		assertTrue(User.login(TEST_USER.getUserId(),TEST_USER.getPassword()));
 	}
@@ -32,7 +31,8 @@ public class UserTest {
 	@Test(expected=PasswordMismatchException.class)
 	public void loginWhenNotPasswordMismated() throws Exception{
 		User user=UserTest.TEST_USER;
-		Database.addUser(user);
+		UserDAO userDAO=new UserDAO();
+		userDAO.addUser(user);
 		User.login(TEST_USER.getUserId(),"password2");
 	}
 }
