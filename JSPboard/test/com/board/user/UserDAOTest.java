@@ -2,9 +2,8 @@ package com.board.user;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-
+import static org.junit.Assert.assertNull;
 import java.sql.Connection;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,12 +19,21 @@ public class UserDAOTest {
 		assertNotNull(conn);
 	}
 	@Test
-	public void addUser() throws Exception{
-		userDAO.addUser(UserTest.TEST_USER);
+	public void crud() throws Exception{
+		User user=UserTest.TEST_USER;
+		userDAO.removeUser(user.getUserId());
+		userDAO.addUser(user);
+		
+		User dbUser=userDAO.findByUserId(user.getUserId());
+		assertEquals(user, dbUser);
 	}
+	
 	@Test
-	public void findByUserId() throws Exception{
-		User user=userDAO.findByUserId("userId");
-		assertEquals(UserTest.TEST_USER, user);
+	public void findWhenNotExisted() throws Exception{
+		User user=UserTest.TEST_USER;
+		userDAO.removeUser(user.getUserId());
+		
+		User dbUser=userDAO.findByUserId(user.getUserId());
+		assertNull(dbUser);
 	}
 }
