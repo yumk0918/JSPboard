@@ -19,7 +19,7 @@
 	    <li><a href="/JSPboard/users/logout"><span class="glyphicon glyphicon-log-out"></span> 로그아웃</a></li>
 	</c:when>
 	<c:otherwise>
-		<li><a href="/JSPboard/form.jsp"><span class="glyphicon glyphicon-user"></span> 회원가입</a></li>
+		<li><a href="/JSPboard/users/createForm"><span class="glyphicon glyphicon-user"></span> 회원가입</a></li>
 	    <li><a href="/JSPboard/login.jsp"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
 	</c:otherwise>
 </c:choose>
