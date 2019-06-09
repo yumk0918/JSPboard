@@ -15,8 +15,8 @@
 	    <ul class="nav navbar-nav navbar-right collapse navbar-collapse" id="myNavbar">
 <c:choose>
 	<c:when test="${not empty userId }">
-		<li><a href="#"><span class="glyphicon glyphicon-user"></span> 개인정보수정</a></li>
-	    <li><a href="./users/logout"><span class="glyphicon glyphicon-log-out"></span> 로그아웃</a></li>
+		<li><a href="/JSPboard/users/updateForm"><span class="glyphicon glyphicon-user"></span> 개인정보수정</a></li>
+	    <li><a href="/JSPboard/users/logout"><span class="glyphicon glyphicon-log-out"></span> 로그아웃</a></li>
 	</c:when>
 	<c:otherwise>
 		<li><a href="/JSPboard/form.jsp"><span class="glyphicon glyphicon-user"></span> 회원가입</a></li>
