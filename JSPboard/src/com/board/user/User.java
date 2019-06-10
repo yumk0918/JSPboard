@@ -1,12 +1,22 @@
 package com.board.user;
 
 import java.sql.SQLException;
-import javax.xml.ws.Response;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class User {
+	@NotNull
+	@Size(min = 4, max = 14)
 	private String userId;
+	@NotNull
+	@Size(min = 8, max = 14)
 	private String password;
+	@NotNull
+	@Size(min = 2, max = 10)
 	private String name;
+	@Email
 	private String email;
 	public User(String userId, String password, String name, String email) {
 		super();

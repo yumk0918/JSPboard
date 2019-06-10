@@ -10,7 +10,7 @@
 	<div class="jumbotron jumbotron">
 	<div class="container">
 	<c:choose>
-		<c:when test="${not empty user.userId }">
+		<c:when test="${isUpdate}">
 			<c:set var="actionURL" value="/JSPboard/users/update"/>
 			<c:set var="button" value="개인정보수정"/>
 			<h1 class="text-center">개인정보수정</h1>
@@ -26,12 +26,12 @@
 	  <div class="form-group">
 	    <label for="userId">사용자 아이디 :</label>
 	    <c:choose>
-		<c:when test="${not empty user.userId }">
+		<c:when test="${isUpdate }">
 			<input type="hidden" name="userId" value="${user.userId}">
 			<h4>${user.userId}</h4>
 		</c:when>
 		<c:otherwise>
-			<input type="text" name="userId" class="form-control" >
+			<input type="text" name="userId" class="form-control" value="${user.userId}">
 		</c:otherwise>
 	</c:choose>
 	    
@@ -39,7 +39,7 @@
 	  <br/>
 	  <div class="form-group">
 	    <label for="password">비밀번호 :</label>
-	    <input type="password" name="password" class="form-control" >
+	    <input type="password" name="password" class="form-control" value="${user.password}">
 	  </div>
 	  <br/>
 	  <div class="form-group">
@@ -53,6 +53,10 @@
 	  </div>
 	  <br/>
 	  <button type="submit" class="btn btn-primary btn-lg btn-block">${button}</button>
+	  <br/>	
+	  <div class="form-group">
+	  		<label style="color: red;">${errorMessage}</label>
+	  </div>
 	  </form>
 	  </div>
 	  </div>
