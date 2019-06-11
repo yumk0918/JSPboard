@@ -5,9 +5,12 @@ import java.util.*;
 import javax.validation.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class UserValidatorTest {
 private static Validator validator;
+ private static final Logger logger = LoggerFactory.getLogger(UserValidatorTest.class);
    @BeforeClass
    public static void setUp() {
       ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
@@ -18,26 +21,26 @@ private static Validator validator;
       User user=new User(null,"password","name","");
       Set<ConstraintViolation<User>> constraintViolations =validator.validate( user );
       assertEquals( 1, constraintViolations.size() );
-      System.out.println(constraintViolations.iterator().next().getMessage());
+      logger.debug(constraintViolations.iterator().next().getMessage());
    }
    @Test
    public void userIdLength() {
       User user=new User("id","password","name","");
       Set<ConstraintViolation<User>> constraintViolations =validator.validate( user );
       assertEquals( 1, constraintViolations.size() );
-      System.out.println(constraintViolations.iterator().next().getMessage());
+      logger.debug(constraintViolations.iterator().next().getMessage());
    
       user=new User("id123456789012345","password","name","");
       constraintViolations =validator.validate( user );
       assertEquals( 1, constraintViolations.size() );
-      System.out.println(constraintViolations.iterator().next().getMessage());
+      logger.debug(constraintViolations.iterator().next().getMessage());
    }
    @Test
    public void email() {
       User user=new User("userid","password","name","email");
       Set<ConstraintViolation<User>> constraintViolations =validator.validate( user );
       assertEquals( 1, constraintViolations.size() );
-      System.out.println(constraintViolations.iterator().next().getMessage());
+      logger.debug(constraintViolations.iterator().next().getMessage());
    }
    @Test
    public void invalidUser() {
@@ -48,7 +51,7 @@ private static Validator validator;
       Iterator<ConstraintViolation<User>>violations=constraintViolations.iterator();
       while(violations.hasNext()) {
     	  ConstraintViolation<User> each=violations.next();
-    	  System.out.println(each.getPropertyPath()+":"+each.getMessage());
+    	  logger.debug(each.getPropertyPath()+":"+each.getMessage());
       }
    }
 }

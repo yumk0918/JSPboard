@@ -14,11 +14,14 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
 import org.apache.commons.beanutils.BeanUtilsBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.board.support.MyValidatorFactory;
 
 @WebServlet("/users/save")
 public class SaveUserServlet extends HttpServlet {
+	 private static final Logger logger = LoggerFactory.getLogger(SaveUserServlet.class);
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		User user=new User();
@@ -27,6 +30,7 @@ public class SaveUserServlet extends HttpServlet {
 		} catch (IllegalAccessException | InvocationTargetException e1) {
 			throw new ServletException(e1);
 		}
+		logger.debug("user : {}",user);
 		Validator validator=MyValidatorFactory.createValidator();
 		Set<ConstraintViolation<User>> constraintViolations =validator.validate( user );
 		if(constraintViolations.size()>0) {

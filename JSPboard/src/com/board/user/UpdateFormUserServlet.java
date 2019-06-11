@@ -10,8 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @WebServlet("/users/updateForm")
 public class UpdateFormUserServlet extends HttpServlet {
+	 private static final Logger logger = LoggerFactory.getLogger(UpdateFormUserServlet.class);
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession();
 		String userId=SessionUtils.getStringValue(session, LoginServlet.SESSION_USER_ID);
@@ -21,7 +25,7 @@ public class UpdateFormUserServlet extends HttpServlet {
 		}
 		
 		UserDAO userDAO=new UserDAO();
-		System.out.println("userId : "+userId);
+		logger.debug("userId : {}",userId);
 		try {
 			User user=userDAO.findByUserId(userId);
 			request.setAttribute("isUpdate",true);
