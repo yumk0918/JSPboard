@@ -13,11 +13,7 @@ public class UserDAOTest {
 	public void setup() {
 		userDAO=new UserDAO();
 	}
-	@Test
-	public void test() {
-		Connection conn=userDAO.getConnection();
-		assertNotNull(conn);
-	}
+	
 	@Test
 	public void crud() throws Exception{
 		User user=UserTest.TEST_USER;
