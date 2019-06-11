@@ -114,4 +114,9 @@ public class User {
 			return false;
 		return true;
 	}
+	public boolean isSameUser(String userId) {
+		if(this.userId==null)
+			return false;
+		return this.userId.equals(userId);
+	}
 }

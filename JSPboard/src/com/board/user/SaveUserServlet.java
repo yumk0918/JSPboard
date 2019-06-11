@@ -1,6 +1,7 @@
 package com.board.user;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.Set;
 import javax.servlet.RequestDispatcher;
@@ -12,16 +13,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
+import org.apache.commons.beanutils.BeanUtilsBean;
+
 import com.board.support.MyValidatorFactory;
 
 @WebServlet("/users/save")
 public class SaveUserServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		User user=new User(request.getParameter("userId"),
-				request.getParameter("password"),
-				request.getParameter("name"),
-				request.getParameter("email"));
+		User user=new User();
+		try {
+			BeanUtilsBean.getInstance().populate(user, request.getParameterMap());
+		} catch (IllegalAccessException | InvocationTargetException e1) {
+			throw new ServletException(e1);
+		}
 		Validator validator=MyValidatorFactory.createValidator();
 		Set<ConstraintViolation<User>> constraintViolations =validator.validate( user );
 		if(constraintViolations.size()>0) {
