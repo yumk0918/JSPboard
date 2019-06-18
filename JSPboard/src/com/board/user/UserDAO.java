@@ -15,13 +15,12 @@ public class UserDAO {
 	}
 
 	public User findByUserId(String userId) {
-		RowMapper<User> rm=new RowMapper<User>() {
-			@Override
-			public User mapRow(ResultSet rs) throws SQLException {
-				return new User(rs.getString("userId"), rs.getString("password"), 
-						rs.getString("name"), rs.getString("email"));
-			}
-		};
+		RowMapper<User> rm=rs->
+		new User(
+				rs.getString("userId"), 
+				rs.getString("password"), 
+				rs.getString("name"), 
+				rs.getString("email"));
 		JdbcTemplate  template=new JdbcTemplate();
 		String sql ="select * from USERS where userId=?";
 		return template.executeQuery(sql,rm,userId);
@@ -40,15 +39,11 @@ public class UserDAO {
 	}
 
 	public List<User> findUsers() {
-		RowMapper<User> rm=new RowMapper<User>() {
-			@Override
-			public User mapRow(ResultSet rs) throws SQLException  {
-				return new User(rs.getString("userId"), 
-						rs.getString("password"), 
-						rs.getString("name"), 
-						rs.getString("email"));
-			}
-		};
+		RowMapper<User> rm=rs->new User(
+				rs.getString("userId"), 
+				rs.getString("password"), 
+				rs.getString("name"), 
+				rs.getString("email"));
 		String sql="select*from USERS";
 		JdbcTemplate template=new JdbcTemplate();
 		return template.list(sql,rm);
