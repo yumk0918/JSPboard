@@ -1,4 +1,4 @@
-package com.board.user;
+package com.board.support;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

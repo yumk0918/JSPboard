@@ -1,4 +1,4 @@
-package com.board.user;
+package com.board.user.web;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -18,6 +18,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.board.support.MyValidatorFactory;
+import com.board.user.User;
+import com.board.user.UserDAO;
 
 @WebServlet("/users/save")
 public class SaveUserServlet extends HttpServlet {

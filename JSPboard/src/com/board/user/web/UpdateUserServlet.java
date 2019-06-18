@@ -1,4 +1,4 @@
-package com.board.user;
+package com.board.user.web;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -18,6 +18,9 @@ import javax.validation.Validator;
 import org.apache.commons.beanutils.BeanUtilsBean;
 
 import com.board.support.MyValidatorFactory;
+import com.board.support.SessionUtils;
+import com.board.user.User;
+import com.board.user.UserDAO;
 
 @WebServlet("/users/update")
 public class UpdateUserServlet extends HttpServlet {
