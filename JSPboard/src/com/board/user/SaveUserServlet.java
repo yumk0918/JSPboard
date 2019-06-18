@@ -41,10 +41,8 @@ public class SaveUserServlet extends HttpServlet {
 		    
 		}
 		UserDAO userDAO=new UserDAO();
-		try {
-			userDAO.addUser(user);
-		} catch (SQLException e) {
-		}
+		userDAO.addUser(user);
+		
 		response.sendRedirect("/JSPboard");
 	}
 	private void forwardJSP(HttpServletRequest request, HttpServletResponse response,String errorMessage) 

@@ -51,10 +51,8 @@ public class UpdateUserServlet extends HttpServlet {
 		    
 		}
 		UserDAO userDAO=new UserDAO();
-		try {
-			userDAO.updateUser(user);
-		} catch (SQLException e) {
-		}
+		userDAO.updateUser(user);
+		
 		response.sendRedirect("/JSPboard");
 	}
 	private void forwardJSP(HttpServletRequest request, HttpServletResponse response,String errorMessage) 

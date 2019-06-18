@@ -26,13 +26,11 @@ public class UpdateFormUserServlet extends HttpServlet {
 		
 		UserDAO userDAO=new UserDAO();
 		logger.debug("userId : {}",userId);
-		try {
 			User user=userDAO.findByUserId(userId);
 			request.setAttribute("isUpdate",true);
 			request.setAttribute("user",user);
 			RequestDispatcher rd=request.getRequestDispatcher("/form.jsp");
 			rd.forward(request, response);
-		} catch (SQLException e) {}
 	}
 
 }
