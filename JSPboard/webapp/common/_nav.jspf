@@ -23,6 +23,7 @@
 	    <li><a href="/JSPboard/login.jsp"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
 	</c:otherwise>
 </c:choose>
+		<li><a href="/JSPboard/board.jsp"><span class="glyphicon glyphicon-th-list"></span> 게시판</a></li>
 	    </ul>
 	  </div>
 	</nav>

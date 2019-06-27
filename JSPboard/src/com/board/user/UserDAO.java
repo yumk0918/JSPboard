@@ -1,9 +1,6 @@
 package com.board.user;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
-
 import com.board.support.jdbc.JdbcTemplate;
 import com.board.support.jdbc.RowMapper;
 

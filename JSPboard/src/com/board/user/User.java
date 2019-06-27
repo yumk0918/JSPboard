@@ -55,21 +55,7 @@ public class User {
 	public String toString() {
 		return "Users [userId=" + userId + ", password=" + password + ", name=" + name + ", email=" + email + "]";
 	}
-	public boolean matchPassword(String newPassword) {
-		return this.password.equals(newPassword);
-	}
-	public static boolean login(String userId, String password) throws UserNotFoundException, PasswordMismatchException {
-		UserDAO userDAO=new UserDAO();
-		User user = userDAO.findByUserId(userId);
-		
-		if(user==null) {
-			throw new UserNotFoundException();
-		}
-		if(!user.matchPassword(password)) {
-			throw new PasswordMismatchException();
-		}
-		return true;
-	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -115,5 +101,20 @@ public class User {
 		if(this.userId==null)
 			return false;
 		return this.userId.equals(userId);
+	}
+	public boolean matchPassword(String newPassword) {
+		return this.password.equals(newPassword);
+	}
+	public static boolean login(String userId, String password) throws UserNotFoundException, PasswordMismatchException {
+		UserDAO userDAO=new UserDAO();
+		User user = userDAO.findByUserId(userId);
+		
+		if(user==null) {
+			throw new UserNotFoundException();
+		}
+		if(!user.matchPassword(password)) {
+			throw new PasswordMismatchException();
+		}
+		return true;
 	}
 }

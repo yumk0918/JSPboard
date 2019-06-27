@@ -56,4 +56,20 @@ div.jumbotron {
 div.form-group label{
 	font-size: 1.8rem;
 }
+
+/* board.jsp css  */
+	table, th{
+		text-align:center;
+		font-size: 1.8rem;
+	}
+	div#table{
+		    margin-top: 4%;
+	}
+	div.empty{
+		height: 40px;
+	}
+	h1.table{
+		text-align:center;
+		font-size: 7rem;
+	}
 </style>
