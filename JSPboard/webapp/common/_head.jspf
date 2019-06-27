@@ -64,6 +64,10 @@ div.form-group label{
 	}
 	div#table{
 		    margin-top: 4%;
+		    width: 60%;
+		   	margin-left: 20%;
+		   	margin-right: 20%;
+		    
 	}
 	div.empty{
 		height: 40px;
@@ -72,4 +76,8 @@ div.form-group label{
 		text-align:center;
 		font-size: 7rem;
 	}
+	div .form-control{
+		font-size: 20px;
+	}
+
 </style>

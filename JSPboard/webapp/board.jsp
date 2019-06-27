@@ -14,10 +14,10 @@
 		<table class="table table-striped table-bordered">
 			<thead>
 				<tr>
-					<th>번호</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
+					<th class="col-md-1">번호</th>
+					<th class="col-md-7">제목</th>
+					<th class="col-md-2">작성자</th>
+					<th class="col-md-2">작성일</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -29,7 +29,7 @@
 				</tr>
 			</tbody>
 		</table>
-		<button type="submit" class="btn btn-primary btn-lg pull-right">글쓰기</button>
+		<button type="button" onclick="location.href='./write.jsp'" class="btn btn-primary btn-lg pull-right">새글</button>
 	</div>
 </div>
 <%@ include file="./common/_body.jspf" %>
