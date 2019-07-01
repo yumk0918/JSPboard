@@ -1,22 +1,18 @@
 package com.board.user;
 
-import java.sql.SQLException;
-
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class User {
-	@NotNull
-	@Size(min = 4, max = 14)
+	@Pattern(regexp="[a-z0-9_-]{5,20}", message="아이디는 5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.")
 	private String userId;
-	@NotNull
-	@Size(min = 8, max = 14)
+	@Pattern(regexp="[A-z0-9]{8,16}", message="비밀번호는 8~16자 영문 대 소문자, 숫자를 사용하세요." )
 	private String password;
-	@NotNull
-	@Size(min = 2, max = 10)
+	@NotBlank(message="이름은 필수정보입니다.")
 	private String name;
-	@Email
+	@Email(message="이메일 주소를 다시 확인해주세요.")
 	private String email;
 	public User(String userId, String password, String name, String email) {
 		super();

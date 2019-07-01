@@ -1,8 +1,7 @@
-package com.board.user.web;
+package com.board.board.web;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.sql.SQLException;
 import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
@@ -11,55 +10,47 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
 import org.apache.commons.beanutils.BeanUtilsBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import com.board.board.Board;
+import com.board.board.BoardDAO;
 import com.board.support.MyValidatorFactory;
-import com.board.support.SessionUtils;
-import com.board.user.User;
-import com.board.user.UserDAO;
 
-@WebServlet("/users/update")
-public class UpdateUserServlet extends HttpServlet {
+@WebServlet("/board/write")
+public class WriteBoardServlet extends HttpServlet {
+	private static final Logger logger = LoggerFactory.getLogger(WriteBoardServlet.class);
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session=request.getSession();
-		String SessionUserId=SessionUtils.getStringValue(session, LoginServlet.SESSION_USER_ID);
-
-		User user=new User();
+		Board board=new Board();
 		try {
-			BeanUtilsBean.getInstance().populate(user, request.getParameterMap());
+			BeanUtilsBean.getInstance().populate(board, request.getParameterMap());
 		} catch (IllegalAccessException | InvocationTargetException e1) {
 			throw new ServletException(e1);
 		}
-		
-		// session에 userId가 있는지 session에 있는 userId와 같은지 확인
-		if(SessionUserId==null || !user.isSameUser(SessionUserId)) {
-			response.sendRedirect("/JSPboard");
-			return;
-		}
-
+		logger.debug("board : {}", board);
 		Validator validator=MyValidatorFactory.createValidator();
-		Set<ConstraintViolation<User>> constraintViolations =validator.validate( user );
+		Set<ConstraintViolation<Board>> constraintViolations =validator.validate( board );
 		if(constraintViolations.size()>0) {
-			request.setAttribute("isUpdate",true);
-			request.setAttribute("user", user);
-			String errorMessage=constraintViolations.iterator().next().getPropertyPath()+" : "+constraintViolations.iterator().next().getMessage();
+			request.setAttribute("board", board);
+			String errorMessage=constraintViolations.iterator().next().getMessage();
+			logger.debug("erromessage : {}", errorMessage);
 		    forwardJSP(request, response, errorMessage);
 		    return;
 		    
 		}
-		UserDAO userDAO=new UserDAO();
-		userDAO.updateUser(user);
+		BoardDAO boardDAO=new BoardDAO();
+		boardDAO.addBoard(board);
 		
-		response.sendRedirect("/JSPboard");
+		response.sendRedirect("/JSPboard/board");
 	}
 	private void forwardJSP(HttpServletRequest request, HttpServletResponse response,String errorMessage) 
 			throws ServletException, IOException {
 		request.setAttribute("errorMessage", errorMessage);
- 		RequestDispatcher rd=request.getRequestDispatcher("/form.jsp");
+ 		RequestDispatcher rd=request.getRequestDispatcher("/write.jsp");
  		rd.forward(request, response);
 	}
 

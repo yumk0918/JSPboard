@@ -2,8 +2,8 @@ package com.board.user.web;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.sql.SQLException;
 import java.util.Set;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,9 +23,8 @@ import com.board.user.UserDAO;
 
 @WebServlet("/users/save")
 public class SaveUserServlet extends HttpServlet {
-	 private static final Logger logger = LoggerFactory.getLogger(SaveUserServlet.class);
+	private static final Logger logger = LoggerFactory.getLogger(SaveUserServlet.class);
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 		User user=new User();
 		try {
 			BeanUtilsBean.getInstance().populate(user, request.getParameterMap());
@@ -34,11 +33,13 @@ public class SaveUserServlet extends HttpServlet {
 		}
 		logger.debug("user : {}",user);
 		Validator validator=MyValidatorFactory.createValidator();
-		Set<ConstraintViolation<User>> constraintViolations =validator.validate( user );
+		Set<ConstraintViolation<User>> constraintViolations =validator.validate(user);
+		
 		if(constraintViolations.size()>0) {
 			request.setAttribute("user", user);
-			String errorMessage=constraintViolations.iterator().next().getPropertyPath()+" : "+constraintViolations.iterator().next().getMessage();
-		    forwardJSP(request, response, errorMessage);
+			String errorMessage=constraintViolations.iterator().next().getMessage();
+
+			forwardJSP(request, response, errorMessage);
 		    return;
 		    
 		}
@@ -53,4 +54,6 @@ public class SaveUserServlet extends HttpServlet {
  		RequestDispatcher rd=request.getRequestDispatcher("/form.jsp");
  		rd.forward(request, response);
 	}
+
+	
 }

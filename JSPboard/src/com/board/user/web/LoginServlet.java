@@ -25,14 +25,15 @@ public class LoginServlet extends HttpServlet {
 	 		session.setAttribute(SESSION_USER_ID, userId);
 	 		response.sendRedirect("/JSPboard");
 	 	}catch(UserNotFoundException e){
-	 		forwardJSP(request, response,"존재하지 않는 사용자입니다. 다시 로그인하세요.");
+	 		forwardJSP(request, response,userId,"존재하지 않는 사용자입니다. 다시 로그인하세요.");
 	 	}catch(PasswordMismatchException e){
-	 		forwardJSP(request, response,"비밀번호가 틀립니다. 다시 로그인하세요.");	 
+	 		forwardJSP(request, response,userId,"비밀번호가 틀립니다. 다시 로그인하세요.");	 
 	 	}
 	}
-	private void forwardJSP(HttpServletRequest request, HttpServletResponse response,String errorMessage) 
+	private void forwardJSP(HttpServletRequest request, HttpServletResponse response,String userId,String errorMessage) 
 			throws ServletException, IOException {
 		request.setAttribute("errorMessage", errorMessage);
+		request.setAttribute("userId", userId);
  		RequestDispatcher rd=request.getRequestDispatcher("/login.jsp");
  		rd.forward(request, response);
 	}

@@ -17,9 +17,14 @@ private static Validator validator;
       validator = factory.getValidator();
    }
    @Test
-   public void userIdIsNull() {
-      User user=new User(null,"password","name","");
+   public void checkUserId() {
+      User user=new User("","password","name","n@n");
       Set<ConstraintViolation<User>> constraintViolations =validator.validate( user );
+      assertEquals( 1, constraintViolations.size() );
+      logger.debug(constraintViolations.iterator().next().getMessage());
+      
+      user=new User("*adfsf","password","name","n@n");
+      constraintViolations =validator.validate( user );
       assertEquals( 1, constraintViolations.size() );
       logger.debug(constraintViolations.iterator().next().getMessage());
    }
@@ -27,11 +32,6 @@ private static Validator validator;
    public void userIdLength() {
       User user=new User("id","password","name","");
       Set<ConstraintViolation<User>> constraintViolations =validator.validate( user );
-      assertEquals( 1, constraintViolations.size() );
-      logger.debug(constraintViolations.iterator().next().getMessage());
-   
-      user=new User("id123456789012345","password","name","");
-      constraintViolations =validator.validate( user );
       assertEquals( 1, constraintViolations.size() );
       logger.debug(constraintViolations.iterator().next().getMessage());
    }
@@ -44,14 +44,14 @@ private static Validator validator;
    }
    @Test
    public void invalidUser() {
-      User user=new User("id","password","name","email");
+      User user=new User("1@@@@@","1","","1");
       Set<ConstraintViolation<User>> constraintViolations =validator.validate( user );
-      assertEquals( 2, constraintViolations.size() );
+      assertEquals( 4, constraintViolations.size() );
 
       Iterator<ConstraintViolation<User>>violations=constraintViolations.iterator();
       while(violations.hasNext()) {
     	  ConstraintViolation<User> each=violations.next();
-    	  logger.debug(each.getPropertyPath()+":"+each.getMessage());
+    	  logger.debug(each.toString());
       }
    }
 }

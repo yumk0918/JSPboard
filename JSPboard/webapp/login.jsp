@@ -15,12 +15,12 @@
 	
 	  <div class="form-group">
 	    <label for="userId">사용자 아이디 :</label>
-	    <input type="text" name="userId" class="form-control">
+	    <input type="text" name="userId" class="form-control" value="${userId}">
 	  </div>
 	  <br/>
 	  <div class="form-group">
 	    <label for="password">비밀번호 :</label>
-	    <input type="password" name="password" class="form-control">
+	    <input type="password" name="password" class="form-control" >
 	  </div>
 	  <br/>
 	  <button type="submit" class="btn btn-primary btn-lg btn-block">로그인</button>

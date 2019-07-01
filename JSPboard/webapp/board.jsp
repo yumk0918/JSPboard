@@ -29,7 +29,15 @@
 				</tr>
 			</tbody>
 		</table>
-		<button type="button" onclick="location.href='./write.jsp'" class="btn btn-primary btn-lg pull-right">새글</button>
+		<c:choose>
+			<c:when test="${not empty userId }">
+				<c:set var="checkLogin" value="./write.jsp"/>
+			</c:when>
+			<c:otherwise>
+				<c:set var="checkLogin" value="./login.jsp"/>
+			</c:otherwise>
+		</c:choose>
+		<button type="button" onclick="location.href='${checkLogin}'" class="btn btn-primary btn-lg pull-right">새글</button>
 	</div>
 </div>
 <%@ include file="./common/_body.jspf" %>
