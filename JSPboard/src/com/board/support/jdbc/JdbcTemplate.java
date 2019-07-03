@@ -32,7 +32,22 @@ public class JdbcTemplate {
 	public void executeUpdate(String sql, Object...parameters)  {
 		executeUpdate(sql,createPrepareStatementSetter(parameters));
 	}
-	
+	public int executeQuery(String sql) {
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			conn=ConnectionManager.getConnection();
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			throw new DataAccessException(e);
+		}
+		return -1;
+	}
 	
 	public <T> T executeQuery(String sql, RowMapper<T> rm,PrepareStatementSetter pss)  {
 		List<T> list=list(sql, rm, pss);

@@ -1,7 +1,6 @@
 package com.board.board.web;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
@@ -10,27 +9,31 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
-import org.apache.commons.beanutils.BeanUtilsBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.board.board.Board;
 import com.board.board.BoardDAO;
 import com.board.support.MyValidatorFactory;
+import com.board.user.web.LoginServlet;
 
 @WebServlet("/board/write")
 public class WriteBoardServlet extends HttpServlet {
 	private static final Logger logger = LoggerFactory.getLogger(WriteBoardServlet.class);
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Board board=new Board();
-		try {
-			BeanUtilsBean.getInstance().populate(board, request.getParameterMap());
-		} catch (IllegalAccessException | InvocationTargetException e1) {
-			throw new ServletException(e1);
-		}
+		HttpSession session=request.getSession();
+		String userId=(String)session.getAttribute(LoginServlet.SESSION_USER_ID);
+		int boardId=BoardDAO.getNextBoardId();
+		Board board=new Board(boardId
+				,request.getParameter("boardTitle")
+				,userId
+				,request.getParameter("boardContent")
+				,1);
+		
 		logger.debug("board : {}", board);
 		Validator validator=MyValidatorFactory.createValidator();
 		Set<ConstraintViolation<Board>> constraintViolations =validator.validate( board );
@@ -45,7 +48,7 @@ public class WriteBoardServlet extends HttpServlet {
 		BoardDAO boardDAO=new BoardDAO();
 		boardDAO.addBoard(board);
 		
-		response.sendRedirect("/JSPboard/board");
+		response.sendRedirect("/JSPboard/board.jsp");
 	}
 	private void forwardJSP(HttpServletRequest request, HttpServletResponse response,String errorMessage) 
 			throws ServletException, IOException {

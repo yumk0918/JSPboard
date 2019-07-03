@@ -16,13 +16,13 @@
 					<tr>
 						<td class="active"><b>제목</b></td>
 						<td>
-							<input class="form-control" type="text" maxlength="20" name="bTitle" value="${board.bTitle }"/>
+							<input class="form-control" type="text" maxlength="20" name="boardTitle" value="${board.boardTitle }"/>
 						</td>
 					</tr>
 					<tr>
 						<td class="active"><b>내용</b></td>
 						<td>
-							<textarea class="form-control" rows="18" name="bContent" >${board.bContent }</textarea>
+							<textarea class="form-control" rows="18" name="boardContent" >${board.boardContent }</textarea>
 						</td>
 					</tr>
 				</table>

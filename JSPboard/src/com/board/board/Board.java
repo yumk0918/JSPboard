@@ -1,85 +1,73 @@
 package com.board.board;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 public class Board {
-	private int bId;
+	private int boardId;
 	@NotBlank(message="제목이 빈칸입니다.")
-	private String bTitle;
+	private String boardTitle;
 	private String userId;
-	private String bDate;
+	private String boardDate;
 	@NotBlank(message="내용이 빈칸입니다.")
-	private String bContent;
-	private int bcheck;
+	private String boardContent;
+	private int boardvalid;
+	
+	
+	
+	public Board(int boardId, String boardTitle, String userId, String boardContent, int boardvalid) {
+		super();
+		this.boardId = boardId;
+		this.boardTitle = boardTitle;
+		this.userId = userId;
+		this.boardContent = boardContent;
+		this.boardvalid = boardvalid;
+		SimpleDateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");
+		this.boardDate=dateFormat.format(Calendar.getInstance().getTime());
+	}
 	
 	@Override
 	public String toString() {
-		return "Board [bId=" + bId + ", bTitle=" + bTitle + ", userId=" + userId + ", bDate=" + bDate + ", bContent="
-				+ bContent + ", bcheck=" + bcheck + "]";
+		return "Board [boardId=" + boardId + ", boardTitle=" + boardTitle + ", userId=" + userId + ", boardDate="
+				+ boardDate + ", boardContent=" + boardContent + ", boardvalid=" + boardvalid + "]";
 	}
-	
-	public Board() {
-		super();
+	public int getBoardId() {
+		return boardId;
 	}
-
-	public Board(int bId, String bTitle, String userId, String bDate, String bContent, int bcheck) {
-		super();
-		this.bId = bId;
-		this.bTitle = bTitle;
-		this.userId = userId;
-		this.bDate = bDate;
-		this.bContent = bContent;
-		this.bcheck = bcheck;
+	public void setBoardId(int boardId) {
+		this.boardId = boardId;
 	}
-
-	public int getbId() {
-		return bId;
+	public String getBoardTitle() {
+		return boardTitle;
 	}
-
-	public void setbId(int bId) {
-		this.bId = bId;
+	public void setBoardTitle(String boardTitle) {
+		this.boardTitle = boardTitle;
 	}
-
-	public String getbTitle() {
-		return bTitle;
-	}
-
-	public void setbTitle(String bTitle) {
-		this.bTitle = bTitle;
-	}
-
 	public String getUserId() {
 		return userId;
 	}
-
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-
-	public String getbDate() {
-		return bDate;
+	public String getBoardDate() {
+		return boardDate;
 	}
-
-	public void setbDate(String bDate) {
-		this.bDate = bDate;
+	public void setBoardDate(String boardDate) {
+		this.boardDate = boardDate;
 	}
-
-	public String getbContent() {
-		return bContent;
+	public String getBoardContent() {
+		return boardContent;
 	}
-
-	public void setbContent(String bContent) {
-		this.bContent = bContent;
+	public void setBoardContent(String boardContent) {
+		this.boardContent = boardContent;
 	}
-
-	public int getBcheck() {
-		return bcheck;
+	public int getBoardvalid() {
+		return boardvalid;
 	}
-
-	public void setBcheck(int bcheck) {
-		this.bcheck = bcheck;
+	public void setBoardvalid(int boardvalid) {
+		this.boardvalid = boardvalid;
 	}
 	
-
 }

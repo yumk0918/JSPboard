@@ -21,14 +21,14 @@ public class BoardTest {
 	   }
 	@Test
 	public void titleIsBlank() {
-		Board board=new Board(0, "", "userId", "bDate", "bContent", 1);
+		Board board=new Board(0, "", "userId", "bContent", 1);
 		Set<ConstraintViolation<Board>> constraintViolations =validator.validate( board );
 	      assertEquals( 1, constraintViolations.size() );
 	      logger.debug(constraintViolations.iterator().next().getMessage());
 	}
 	@Test
 	public void ContentIsNull() {
-		Board board=new Board(0, "bTitle", "userId", "bDate", null, 1);
+		Board board=new Board(0, "bTitle", "userId",null, 1);
 		Set<ConstraintViolation<Board>> constraintViolations =validator.validate( board );
 	      assertEquals( 1, constraintViolations.size() );
 	      logger.debug(constraintViolations.iterator().next().getMessage());
