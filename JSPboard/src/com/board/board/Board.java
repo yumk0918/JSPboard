@@ -17,6 +17,16 @@ public class Board {
 	
 	
 	
+	public Board(int boardId, String boardTitle, String userId, String boardDate, String boardContent, int boardvalid) {
+		super();
+		this.boardId = boardId;
+		this.boardTitle = boardTitle;
+		this.userId = userId;
+		this.boardDate = boardDate;
+		this.boardContent = boardContent;
+		this.boardvalid = boardvalid;
+	}
+
 	public Board(int boardId, String boardTitle, String userId, String boardContent, int boardvalid) {
 		super();
 		this.boardId = boardId;
@@ -24,7 +34,7 @@ public class Board {
 		this.userId = userId;
 		this.boardContent = boardContent;
 		this.boardvalid = boardvalid;
-		SimpleDateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd HH:mm");
 		this.boardDate=dateFormat.format(Calendar.getInstance().getTime());
 	}
 	

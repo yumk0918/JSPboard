@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import com.board.board.Board;
 import com.board.board.BoardDAO;
 import com.board.support.MyValidatorFactory;
+import com.board.support.SessionUtils;
 import com.board.user.web.LoginServlet;
 
 @WebServlet("/board/write")
@@ -26,7 +27,7 @@ public class WriteBoardServlet extends HttpServlet {
 	private static final Logger logger = LoggerFactory.getLogger(WriteBoardServlet.class);
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession();
-		String userId=(String)session.getAttribute(LoginServlet.SESSION_USER_ID);
+		String userId=SessionUtils.getStringValue(session, LoginServlet.SESSION_USER_ID);
 		int boardId=BoardDAO.getNextBoardId();
 		Board board=new Board(boardId
 				,request.getParameter("boardTitle")
@@ -48,7 +49,7 @@ public class WriteBoardServlet extends HttpServlet {
 		BoardDAO boardDAO=new BoardDAO();
 		boardDAO.addBoard(board);
 		
-		response.sendRedirect("/JSPboard/board.jsp");
+		response.sendRedirect("/JSPboard/board/list");
 	}
 	private void forwardJSP(HttpServletRequest request, HttpServletResponse response,String errorMessage) 
 			throws ServletException, IOException {

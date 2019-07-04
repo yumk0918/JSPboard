@@ -1,6 +1,8 @@
 package com.board.board;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -23,5 +25,17 @@ public class BoardDAOTest {
 	@Test
 	public void checkBoardId() {
 		assertTrue(boardDAO.getNextBoardId()>=0);
+	}
+	@Test
+	public void showBoardList() {
+		List<Board> boardList= boardDAO.showBoardList(0);
+		logger.debug("boardList : {}",boardList);
+		assertTrue(boardList.size()>0);
+	}
+	@Test
+	public void checkTotalPage() {
+		int totalPage=boardDAO.getTotalPage();
+		logger.debug("totalPage : {}", totalPage);
+		assertTrue(totalPage>=0);
 	}
 }
