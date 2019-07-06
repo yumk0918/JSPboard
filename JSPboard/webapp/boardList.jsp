@@ -24,7 +24,7 @@
 				<c:forEach var="boardVO" items="${boardList}">
 				<tr>
 					<td><c:out value="${boardVO.boardId}"/></td>
-					<td><c:out value="${boardVO.boardTitle}"/></td>
+					<td><a href="/JSPboard/board/view?id=${boardVO.boardId}"><c:out value="${boardVO.boardTitle}"/></a></td>
 					<td><c:out value="${boardVO.userId}"/></td>
 					<td><c:out value="${boardVO.boardDate}"/></td>
 				</tr>
@@ -34,7 +34,7 @@
 		
 		<c:choose>
 			<c:when test="${not empty userId }">
-				<c:set var="checkLogin" value="/JSPboard/write.jsp"/>
+				<c:set var="checkLogin" value="/JSPboard/boardWrite.jsp"/>
 			</c:when>
 			<c:otherwise>
 				<c:set var="checkLogin" value="/JSPboard/login.jsp"/>

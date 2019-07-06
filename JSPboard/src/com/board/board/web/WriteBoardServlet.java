@@ -54,7 +54,7 @@ public class WriteBoardServlet extends HttpServlet {
 	private void forwardJSP(HttpServletRequest request, HttpServletResponse response,String errorMessage) 
 			throws ServletException, IOException {
 		request.setAttribute("errorMessage", errorMessage);
- 		RequestDispatcher rd=request.getRequestDispatcher("/write.jsp");
+ 		RequestDispatcher rd=request.getRequestDispatcher("/boardWrite.jsp");
  		rd.forward(request, response);
 	}
 

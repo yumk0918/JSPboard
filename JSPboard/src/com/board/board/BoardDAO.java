@@ -46,5 +46,16 @@ public class BoardDAO {
 		String sql ="select new.* from (select*from BOARD order by id desc) new limit ?,10";
 		return template.list(sql,rm,10*(pageNum-1));
 	}
-
+	public Board showBoardView(String boardId) {
+		RowMapper<Board> rm=rs->new Board(
+				rs.getInt("id"), 
+				rs.getString("title"), 
+				rs.getString("userId"), 
+				rs.getString("date"), 
+				rs.getString("content"), 
+				rs.getInt("valid"));
+		JdbcTemplate  template=new JdbcTemplate();
+		String sql ="select * from  BOARD where id=?";
+		return template.executeQuery(sql, rm, boardId);
+	}
 }

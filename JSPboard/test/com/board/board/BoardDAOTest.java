@@ -1,5 +1,7 @@
 package com.board.board;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
@@ -19,8 +21,12 @@ public class BoardDAOTest {
 	}
 	@Test
 	public void crud() throws Exception{
-		boardDAO.removeBoard(0);
 		boardDAO.addBoard(TEST_BOARD);
+		Board board=boardDAO.showBoardView("0");
+		assertNotNull(board);
+		board=boardDAO.showBoardView("100");
+		assertNull(board);
+		boardDAO.removeBoard(0);
 	}
 	/*@Test
 	public void makeForPaging() throws Exception{
@@ -35,7 +41,7 @@ public class BoardDAOTest {
 	}
 	@Test
 	public void showBoardList() {
-		List<Board> boardList= boardDAO.showBoardList(0);
+		List<Board> boardList= boardDAO.showBoardList(1);
 		logger.debug("boardList : {}",boardList);
 		assertTrue(boardList.size()>0);
 	}

@@ -22,7 +22,7 @@
 					<tr>
 						<td class="active"><b>내용</b></td>
 						<td>
-							<textarea class="form-control" rows="18" name="boardContent" >${board.boardContent }</textarea>
+							<textarea class="form-control" style="height:500px" name="boardContent" >${board.boardContent }</textarea>
 						</td>
 					</tr>
 				</table>
