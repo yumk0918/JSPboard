@@ -20,26 +20,27 @@ import com.board.board.BoardDAO;
 public class ShowBoardListServlet extends HttpServlet {
 	private static final Logger logger = LoggerFactory.getLogger(ShowBoardListServlet.class);
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String page=request.getParameter("page");
-		int totalPage=BoardDAO.getTotalPage();
-		int pageNum=getPageNum(page, totalPage);
+		String page=request.getParameter("page"); // 요구받은 페이지
+		int totalPage=BoardDAO.getTotalPage(); // 전체 페이지
+		int currentPage=getCurrentPage(page, totalPage); // 페이지 예외처리, 쿼리문에서 가져 갈 페이지
 		
 		BoardDAO boardDAO=new BoardDAO();
-		List<Board> boardList = boardDAO.showBoardList(pageNum);
+		List<Board> boardList = boardDAO.showBoardList(currentPage);
 		
 		request.setAttribute("totalPage", totalPage);
-		request.setAttribute("currentPage", pageNum);
+		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("boardList", boardList);
 		RequestDispatcher rd=request.getRequestDispatcher("/boardList.jsp");
 		rd.forward(request, response);
 		logger.debug(boardList.toString());
 	}
-	private int getPageNum(String page, int totalPage) {
-		if(page==null) return 0;
-		int pageNum=Integer.parseInt(page);
-		if(pageNum<0) return 0;
-		else if(pageNum>totalPage) return totalPage;
-		return pageNum;
+	private int getCurrentPage(String page, int totalPage) {
+		if(page==null) return 1;
+		int currentPage=Integer.parseInt(page);
+		
+		if(currentPage<=0) return 1;
+		else if(currentPage>totalPage) return totalPage;
+		
+		return currentPage;
 	}
-
 }

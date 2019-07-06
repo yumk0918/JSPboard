@@ -18,7 +18,8 @@ public class BoardDAO {
 	public static int getTotalPage() {
 		JdbcTemplate  template=new JdbcTemplate();
 		String sql ="select count(id) from BOARD";
-		return (template.executeQuery(sql)-1)/10+1;
+		int totalCount=template.executeQuery(sql);
+		return totalCount%10==0?totalCount/10:totalCount/10+1;
 	}
 	public void addBoard(Board board) {
 		String sql="insert into BOARD values(?,?,?,?,?,?)";
@@ -42,10 +43,8 @@ public class BoardDAO {
 				rs.getString("content"), 
 				rs.getInt("valid"));
 		JdbcTemplate  template=new JdbcTemplate();
-		String sql ="select * from BOARD where id>=? and id<=? order by id desc";
-		int firstPageNum=10*pageNum+1;
-		int lastPageNum=10*(pageNum+1);
-		return template.list(sql,rm,firstPageNum,lastPageNum);
+		String sql ="select new.* from (select*from BOARD order by id desc) new limit ?,10";
+		return template.list(sql,rm,10*(pageNum-1));
 	}
 
 }

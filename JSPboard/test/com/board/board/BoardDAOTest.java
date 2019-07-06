@@ -22,6 +22,13 @@ public class BoardDAOTest {
 		boardDAO.removeBoard(0);
 		boardDAO.addBoard(TEST_BOARD);
 	}
+	/*@Test
+	public void makeForPaging() throws Exception{
+		for(int i=12;i<60;i++) {
+			Board board=new Board(i,"Title "+i,"userId","Content "+i,1);
+			boardDAO.addBoard(board);
+		}
+	}*/
 	@Test
 	public void checkBoardId() {
 		assertTrue(boardDAO.getNextBoardId()>=0);

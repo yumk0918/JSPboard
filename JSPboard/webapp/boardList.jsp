@@ -44,13 +44,20 @@
 		<button type="button" onclick="location.href='${checkLogin}'" class="btn btn-primary btn-lg pull-right">새글</button>
 	</div>
 		<div class="row ">
-			<c:if test="${currentPage>0 }">
-				<a href="/JSPboard/board/list?page=${currentPage-1}" class="btn btn-primary btn-sm pull-left">이전</a>
-			</c:if>
-				<div class="text-center"><h4><c:out value="${currentPage+1 }/${totalPage } 페이지"/></h4></div>
-			<c:if test="${(currentPage+1)<totalPage }">
-				<a href="/JSPboard/board/list?page=${currentPage+1}" class="btn btn-primary btn-sm pull-left">다음</a>
-			</c:if>
+			<div class="text-center">
+				<h4>				
+					<c:if test="${currentPage>1 }">
+						<a href="/JSPboard/board/list">[처음]</a>
+						<a href="/JSPboard/board/list?page=${currentPage-1}">[이전]</a>
+					</c:if>
+						<c:out value="${currentPage}/${totalPage } 페이지"/>
+					<c:if test="${currentPage<totalPage }">
+						<a href="/JSPboard/board/list?page=${currentPage+1}">[다음]</a>
+						<a href="/JSPboard/board/list?page=${totalPage}">[끝]</a>
+					</c:if>
+				
+				</h4>
+			</div>
 		</div>
 </div>
 <%@ include file="./common/_body.jspf" %>
