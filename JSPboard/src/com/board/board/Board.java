@@ -15,8 +15,10 @@ public class Board {
 	private String boardContent;
 	private int boardvalid;
 	
-	
-	
+	public Board() {
+		super();
+	}
+
 	public Board(int boardId, String boardTitle, String userId, String boardDate, String boardContent, int boardvalid) {
 		super();
 		this.boardId = boardId;
@@ -78,6 +80,55 @@ public class Board {
 	}
 	public void setBoardvalid(int boardvalid) {
 		this.boardvalid = boardvalid;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((boardContent == null) ? 0 : boardContent.hashCode());
+		result = prime * result + ((boardDate == null) ? 0 : boardDate.hashCode());
+		result = prime * result + boardId;
+		result = prime * result + ((boardTitle == null) ? 0 : boardTitle.hashCode());
+		result = prime * result + boardvalid;
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Board other = (Board) obj;
+		if (boardContent == null) {
+			if (other.boardContent != null)
+				return false;
+		} else if (!boardContent.equals(other.boardContent))
+			return false;
+		if (boardDate == null) {
+			if (other.boardDate != null)
+				return false;
+		} else if (!boardDate.equals(other.boardDate))
+			return false;
+		if (boardId != other.boardId)
+			return false;
+		if (boardTitle == null) {
+			if (other.boardTitle != null)
+				return false;
+		} else if (!boardTitle.equals(other.boardTitle))
+			return false;
+		if (boardvalid != other.boardvalid)
+			return false;
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
+			return false;
+		return true;
 	}
 	
 }

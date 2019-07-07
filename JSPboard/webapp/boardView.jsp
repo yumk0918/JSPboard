@@ -39,8 +39,8 @@
 				<div align="right">
 				<a href="/JSPboard/board/list" class="btn btn-primary btn-lg">목록</a>
 				<c:if test="${isUpdateBoard}">
-					&nbsp;&nbsp;<a href="#" class="btn btn-primary btn-lg">수정</a>
-					&nbsp;&nbsp;<a href="#" class="btn btn-primary btn-lg">삭제</a>
+					&nbsp;&nbsp;<a href="/JSPboard/board/updateForm?id=${board.boardId}" class="btn btn-primary btn-lg">수정</a>
+					&nbsp;&nbsp;<a href="/JSPboard/board/remove?id=${board.boardId}" class="btn btn-primary btn-lg">삭제</a>
 				</c:if>
 				</div>
 		</div>

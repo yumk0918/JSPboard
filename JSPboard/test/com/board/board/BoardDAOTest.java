@@ -1,5 +1,6 @@
 package com.board.board;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -22,11 +23,13 @@ public class BoardDAOTest {
 	@Test
 	public void crud() throws Exception{
 		boardDAO.addBoard(TEST_BOARD);
-		Board board=boardDAO.showBoardView("0");
-		assertNotNull(board);
-		board=boardDAO.showBoardView("100");
-		assertNull(board);
-		boardDAO.removeBoard(0);
+		
+		Board updateBoard=new Board(0, "uTitle", "userId", "uContent", 1);
+		boardDAO.updateBoard(updateBoard);
+		Board dbboard=boardDAO.showBoardView("0");
+		assertEquals(dbboard, updateBoard);
+		
+		boardDAO.removeBoard("0","userId");
 	}
 	/*@Test
 	public void makeForPaging() throws Exception{
@@ -51,4 +54,5 @@ public class BoardDAOTest {
 		logger.debug("totalPage : {}", totalPage);
 		assertTrue(totalPage>=0);
 	}
+	
 }

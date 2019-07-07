@@ -29,10 +29,10 @@ public class BoardDAO {
 				board.getUserId(),board.getBoardDate(),
 				board.getBoardContent(),board.getBoardvalid());
 	}
-	public void removeBoard(int boardId) {
-		String sql="delete from BOARD where id=?";
+	public void removeBoard(String boardId,String userId) {
+		String sql="delete from BOARD where id=? and userId=?";
 		JdbcTemplate template=new JdbcTemplate();
-		template.executeUpdate(sql,boardId);
+		template.executeUpdate(sql,boardId,userId);
 	}
 	public List<Board> showBoardList(int pageNum) {
 		RowMapper<Board> rm=rs->new Board(
@@ -57,5 +57,11 @@ public class BoardDAO {
 		JdbcTemplate  template=new JdbcTemplate();
 		String sql ="select * from  BOARD where id=?";
 		return template.executeQuery(sql, rm, boardId);
+	}
+	public void updateBoard(Board board) {
+		String sql="update BOARD set title=?, content=? where userId=? and id=?";
+		JdbcTemplate template=new JdbcTemplate();
+		template.executeUpdate(sql,board.getBoardTitle(),board.getBoardContent(), board.getUserId(),board.getBoardId());
+	
 	}
 }
