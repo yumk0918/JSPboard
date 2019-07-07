@@ -13,7 +13,7 @@ public class Board {
 	private String boardDate;
 	@NotBlank(message="내용이 빈칸입니다.")
 	private String boardContent;
-	private int boardvalid;
+	private int boardValid;
 	
 	public Board() {
 		super();
@@ -26,7 +26,7 @@ public class Board {
 		this.userId = userId;
 		this.boardDate = boardDate;
 		this.boardContent = boardContent;
-		this.boardvalid = boardvalid;
+		this.boardValid = boardvalid;
 	}
 
 	public Board(int boardId, String boardTitle, String userId, String boardContent, int boardvalid) {
@@ -35,7 +35,7 @@ public class Board {
 		this.boardTitle = boardTitle;
 		this.userId = userId;
 		this.boardContent = boardContent;
-		this.boardvalid = boardvalid;
+		this.boardValid = boardvalid;
 		SimpleDateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd HH:mm");
 		this.boardDate=dateFormat.format(Calendar.getInstance().getTime());
 	}
@@ -43,7 +43,7 @@ public class Board {
 	@Override
 	public String toString() {
 		return "Board [boardId=" + boardId + ", boardTitle=" + boardTitle + ", userId=" + userId + ", boardDate="
-				+ boardDate + ", boardContent=" + boardContent + ", boardvalid=" + boardvalid + "]";
+				+ boardDate + ", boardContent=" + boardContent + ", boardvalid=" + boardValid + "]";
 	}
 	public int getBoardId() {
 		return boardId;
@@ -75,11 +75,12 @@ public class Board {
 	public void setBoardContent(String boardContent) {
 		this.boardContent = boardContent;
 	}
-	public int getBoardvalid() {
-		return boardvalid;
+	public int getBoardValid() {
+		return boardValid;
 	}
-	public void setBoardvalid(int boardvalid) {
-		this.boardvalid = boardvalid;
+
+	public void setBoardValid(int boardValid) {
+		this.boardValid = boardValid;
 	}
 
 	@Override
@@ -90,7 +91,7 @@ public class Board {
 		result = prime * result + ((boardDate == null) ? 0 : boardDate.hashCode());
 		result = prime * result + boardId;
 		result = prime * result + ((boardTitle == null) ? 0 : boardTitle.hashCode());
-		result = prime * result + boardvalid;
+		result = prime * result + boardValid;
 		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
@@ -121,7 +122,7 @@ public class Board {
 				return false;
 		} else if (!boardTitle.equals(other.boardTitle))
 			return false;
-		if (boardvalid != other.boardvalid)
+		if (boardValid != other.boardValid)
 			return false;
 		if (userId == null) {
 			if (other.userId != null)

@@ -23,10 +23,20 @@
 			<tbody>
 				<c:forEach var="boardVO" items="${boardList}">
 				<tr>
-					<td><c:out value="${boardVO.boardId}"/></td>
-					<td><a href="/JSPboard/board/view?id=${boardVO.boardId}"><c:out value="${boardVO.boardTitle}"/></a></td>
-					<td><c:out value="${boardVO.userId}"/></td>
-					<td><c:out value="${boardVO.boardDate}"/></td>
+					<c:choose>
+						<c:when test="${boardVO.boardValid==0}">
+							<td><c:out value="${boardVO.boardId}"/></td>
+							<td><i>삭제된 댓글입니다.</i></td>
+							<td><c:out value="${boardVO.userId}"/></td>
+							<td><c:out value="${boardVO.boardDate}"/></td>
+						</c:when>
+						<c:otherwise>
+							<td><c:out value="${boardVO.boardId}"/></td>
+							<td><a style="color:#000000"href="/JSPboard/board/view?id=${boardVO.boardId}"><c:out value="${boardVO.boardTitle}"/></a></td>
+							<td><c:out value="${boardVO.userId}"/></td>
+							<td><c:out value="${boardVO.boardDate}"/></td>
+						</c:otherwise>
+					</c:choose>
 				</tr>
 				</c:forEach>
 			</tbody>

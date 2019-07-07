@@ -27,7 +27,7 @@ public class BoardDAO {
 		template.executeUpdate(sql,
 				board.getBoardId(),board.getBoardTitle(),
 				board.getUserId(),board.getBoardDate(),
-				board.getBoardContent(),board.getBoardvalid());
+				board.getBoardContent(),board.getBoardValid());
 	}
 	public void removeBoard(String boardId,String userId) {
 		String sql="delete from BOARD where id=? and userId=?";
@@ -63,5 +63,10 @@ public class BoardDAO {
 		JdbcTemplate template=new JdbcTemplate();
 		template.executeUpdate(sql,board.getBoardTitle(),board.getBoardContent(), board.getUserId(),board.getBoardId());
 	
+	}
+	public void updateBoardValid(String userId,String boardId) {
+		String sql="update BOARD set valid=0 where userId=? and id=?";
+		JdbcTemplate template=new JdbcTemplate();
+		template.executeUpdate(sql,userId, boardId);
 	}
 }

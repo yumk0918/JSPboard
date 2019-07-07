@@ -22,14 +22,20 @@ public class BoardDAOTest {
 	}
 	@Test
 	public void crud() throws Exception{
+		String boardId=TEST_BOARD.getBoardId()+"";
 		boardDAO.addBoard(TEST_BOARD);
 		
 		Board updateBoard=new Board(0, "uTitle", "userId", "uContent", 1);
 		boardDAO.updateBoard(updateBoard);
-		Board dbboard=boardDAO.showBoardView("0");
+		
+		Board dbboard=boardDAO.showBoardView(boardId);
 		assertEquals(dbboard, updateBoard);
 		
-		boardDAO.removeBoard("0","userId");
+		boardDAO.updateBoardValid(TEST_BOARD.getUserId(), boardId);
+		dbboard=boardDAO.showBoardView(boardId);
+		assertEquals(dbboard.getBoardValid(),0);
+		
+		boardDAO.removeBoard(boardId,TEST_BOARD.getUserId());
 	}
 	/*@Test
 	public void makeForPaging() throws Exception{
@@ -54,5 +60,6 @@ public class BoardDAOTest {
 		logger.debug("totalPage : {}", totalPage);
 		assertTrue(totalPage>=0);
 	}
+
 	
 }
